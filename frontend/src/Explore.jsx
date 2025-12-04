@@ -68,11 +68,11 @@ const items = [
 
 
 useEffect(() => {
-  fetch("http://localhost:5000/api/all")
+  fetch("http://localhost:5000/api/")
     .then((res) => res.json())
     .then((data) => {
       console.log("FROM BACKEND:", data);
-      setApiData(Array.isArray(data) ? data : []);
+      setApiData(Array.isArray(data.items) ? data.items : []);
       setIsLoading(false);
     })
     .catch((err) => {
@@ -158,11 +158,11 @@ const template = (catbtn) => {
           <Box><Button sx={{width: 'max-content', backgroundColor: 'rgba(158, 41, 74, 0.5)', color: 'rgba(246, 218, 226, 0.8)', gap: 1.2, borderRadius: '1rem', fontFamily: 'Delius, cursive', fontWeight: '700'}}><PlusCircle />Nutrition</Button></Box> */}
         <Grid container spacing={3} justifyContent="center" sx={{ mt: 2 }}>
 
-          {apiData.map((info, index) => (
-  <Grid item xs={12} sm={6} md={4} key={index}>
+          {apiData.map(info => (
+  <Grid item xs={12} sm={6} md={4}>
    <Box className="infoBoxes" style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.5rem', marginBottom: '0.5rem'}}>
                   <Card
-                    key={index}
+                    key={info.id}
                     className="info1"
                     sx={{
                       borderWidth: 0,
@@ -325,8 +325,8 @@ const template = (catbtn) => {
 
       <Box
       sx={{
-        backgroundColor: !isOpen ? "rgba(85, 7, 29, 0.5)" : "",
-        borderRadius: "1rem",
+        backgroundColor: !isOpen ? "#ffcfe7" : "",
+        borderRadius: "1.3rem",
         padding: "0.4rem",
         boxShadow: "0 6px 18px rgba(0,0,0,0.1)",
         marginRight: "1rem",

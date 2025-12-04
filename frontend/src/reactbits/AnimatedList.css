@@ -34,14 +34,14 @@
 
 .item {
   padding: 16px;
-  background-color: rgba(85, 7, 29, 0.5);
+  background-color: #ff80ab;
   border-radius: 8px;
   margin-bottom: 1rem;
   height: max-content;
 }
 
 .item.selected {
-  background-color: rgb(196, 54, 113, 0.7);
+  background-color: #c51162;
 }
 
 .item-text {
