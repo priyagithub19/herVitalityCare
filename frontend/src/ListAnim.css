@@ -1,0 +1,26 @@
+.contain{
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    height: 160px;
+    position: relative;
+}
+
+.box{
+    width: 100px;
+    height: 100px;
+    background-color: #0cdcf7;
+    border-radius: 10px;
+}
+
+.button{
+    background-color: #0cdcf7;
+    border-radius: 10px;
+    padding: 10px 20px;
+    color: #0f1115;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
