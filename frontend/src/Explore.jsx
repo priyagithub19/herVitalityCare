@@ -11,11 +11,9 @@ import {
 import { ArrowUpRight, Bold } from "lucide-react";
 import Navbar from "./Navbar";
 import AspectRatio from '@mui/joy/AspectRatio';
-import { PlusCircle } from "lucide-react";
 import Dock from './reactbits/Dock';
 import { BiSolidCategoryAlt } from "react-icons/bi";
 import TopicIcon from '@mui/icons-material/Topic';
-import { Carousel } from 'primereact/carousel';
 import AnimatedList from "./reactbits/ANimatedList";
 import { Cross as Hamburger } from 'hamburger-react'
 import { AnimatePresence, motion } from "motion/react"
@@ -29,8 +27,8 @@ export default function Explore() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [topics, setTopics] = useState(false);
-  const [selectedCity, setSelectedCity] = useState(null);
-  const [category, setCategory] = useState([]);
+  const [selectedCat, setSelectedCat] = useState("Cancer");
+  const [category, setCategory] = useState("15");
   const [isOpen, setOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -66,13 +64,24 @@ const items = [
     { icon: <TopicIcon />, label: 'Topics', onClick: () => alert('Topics!') },
   ];
 
-
 useEffect(() => {
-  fetch("http://localhost:5000/api/")
+  if (!category) return;
+
+  setIsLoading(true);
+  setError("");
+
+  fetch(`http://localhost:5000/topicsearch?categoryId=${category}`)
     .then((res) => res.json())
     .then((data) => {
       console.log("FROM BACKEND:", data);
-      setApiData(Array.isArray(data.items) ? data.items : []);
+
+      if (data.error) {
+        setError(data.error);
+        setApiData([]);
+      } else {
+        setApiData(data.items || []);
+      }
+
       setIsLoading(false);
     })
     .catch((err) => {
@@ -80,35 +89,7 @@ useEffect(() => {
       setError("Failed to fetch data");
       setIsLoading(false);
     });
-}, []);
-
-
-const template = (catbtn) => {
-  return (
-    <Box sx={{display: 'flex', margin: 0}}>
-      <Typography key={catbtn.id}>{catbtn.label}</Typography>
-    </Box>
-    // <Button
-    //   icon={<PlusCircle style={{ marginRight: "0.5rem" }} />}
-    //   style={{
-    //     width: "max-content",
-    //     backgroundColor: "rgba(158, 41, 74, 0.5)",
-    //     color: "rgba(246, 218, 226, 0.8)",
-    //     borderRadius: "1rem",
-    //     fontFamily: "Delius, cursive",
-    //     fontWeight: "700",
-    //     marginRight: "1rem",
-    //     // padding: "0.8rem 1.2rem",
-    //     display: "flex",
-    //     alignItems: "center",
-    //     justifyContent: "space-around",
-    //     gap: "0.6rem",
-    //     whiteSpace: "nowrap"
-    //    }}>
-    //   {catbtn.label}
-    //   </Button>
-  );
-};
+}, [category]);
 
 
 
@@ -120,49 +101,22 @@ const template = (catbtn) => {
         <Typography variant="h3" sx={{ color: "rgba(227,4,110,1)", mb: 2 }}>
           || Articles ||
         </Typography>
-
-        {/* Search Input */}
-        {/* <TextField
-          placeholder="Search articles..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          sx={{ mb: 4, width: "50%" }}
-        /> */}
-
         {isLoading && <Typography>Loading...</Typography>}
         {error && <Typography color="error">Error: {error}</Typography>}
-        {/* {!isLoading && !error && apiData.length === 0 && (
-          <Typography>No articles found.</Typography>
-        )} */}
-          {/* <Box>
-            <Typography variant="h6" sx={{ mb: 2, fontWeight: '600', fontFamily: 'Texturina, serif' }}>
-              Explore articles curated to empower your health journey.
-            </Typography>
-          </Box> */}
           <Box>
           <Box sx={{marginBottom: '1rem', gap: 2, display: 'flex', justifyContent: 'center', marginTop: '2rem'}}>
-      
-            {/* <Button className="expbtn" sx={{color: '#fbd9e5', height: '2.5rem', backgroundColor: !topics == true ?  'rgba(196, 54, 112, 0.8)': 'rgba(196, 54, 112, 0.5)', width: '10rem', fontSize: '0.8rem', borderRadius: '0.2rem 0.2rem 1rem 1rem', fontFamily: 'Delius, cursive', fontWeight: '600', letterSpacing: '0.2rem'}} onClick={() => setTopics(false)}>
-              Categories
-            </Button>
-            <Button className="expbtn" sx={{color: '#fbd9e5', height: '2.5rem', backgroundColor: topics == true ?  'rgba(196, 54, 112, 0.8)': 'rgba(196, 54, 112, 0.5)', width: '10rem', fontSize: '0.8rem', borderRadius: '0.2rem 0.2rem 1rem 1rem', fontFamily: 'Delius, cursive', fontWeight: '600', letterSpacing: '0.2rem'}} onClick={()=> setTopics(true)}>
-              Topics
-            </Button> */}
+            <Typography variant="h6" sx={{ fontWeight: '600', fontFamily: 'Texturina, serif' }}>
+              Selected Category: <span style={{color: "#BF3853"}}>"{selectedCat}"</span>
+            </Typography>
             </Box>
           </Box>
           <Box sx={{width: '70%'}}>
           </Box>   
-             {/* <Box><Button sx={{width: 'max-content', backgroundColor: 'rgba(158, 41, 74, 0.5)', color: 'rgba(246, 218, 226, 0.8)', gap: 1.2, borderRadius: '1rem', fontFamily: 'Delius, cursive', fontWeight: '700'}}><PlusCircle />Mental Health</Button></Box>
-          <Box><Button sx={{width: 'max-content', backgroundColor: 'rgba(158, 41, 74, 0.5)', color: 'rgba(246, 218, 226, 0.8)', gap: 1.2, borderRadius: '1rem', fontFamily: 'Delius, cursive', fontWeight: '700'}}><PlusCircle />Periods</Button></Box>
-          <Box><Button sx={{width: 'max-content', backgroundColor: 'rgba(158, 41, 74, 0.5)', color: 'rgba(246, 218, 226, 0.8)', gap: 1.2, borderRadius: '1rem', fontFamily: 'Delius, cursive', fontWeight: '700'}}><PlusCircle />Wellness</Button></Box>
-          <Box><Button sx={{width: 'max-content', backgroundColor: 'rgba(158, 41, 74, 0.5)', color: 'rgba(246, 218, 226, 0.8)', gap: 1.2, borderRadius: '1rem', fontFamily: 'Delius, cursive', fontWeight: '700'}}><PlusCircle />Nutrition</Button></Box> */}
         <Grid container spacing={3} justifyContent="center" sx={{ mt: 2 }}>
-
           {apiData.map(info => (
-  <Grid item xs={12} sm={6} md={4}>
+  <Grid item xs={12} sm={6} md={4} key={info.id}>
    <Box className="infoBoxes" style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.5rem', marginBottom: '0.5rem'}}>
                   <Card
-                    key={info.id}
                     className="info1"
                     sx={{
                       borderWidth: 0,
@@ -215,7 +169,7 @@ const template = (catbtn) => {
                       onMouseEnter={(e) => (e.currentTarget.style.transform = 'rotate(15deg) scale(1.1)')}
                       onMouseLeave={(e) => (e.currentTarget.style.transform = 'rotate(0deg) scale(1)')}
                     >
-                      <a href={info.link} target="_blank" rel="noopener noreferrer" >
+                      <a href={info.url} target="_blank" rel="noopener noreferrer" >
                       <ArrowUpRight size={18} color=" #000000ff" />
                       </a>
                     </span>
@@ -249,54 +203,6 @@ const template = (catbtn) => {
   }}
 >
 
-  {/* LEFT SIDE MENU + HAMBURGER (opens leftward) */}
-  {/* <Box sx={{ display: "flex", alignItems: "center" }}>
-    
-    <AnimatePresence>
-      {isOpen && (
-        <Box
-          sx={{
-            marginRight: "0.75rem",
-            display: "flex",
-            flexDirection: "row",
-            transformOrigin: "left center",
-          }}
-        >
-          <AnimatedList
-            items={categories.map(c => c.label)}
-            onItemSelect={(item, index) => console.log(item, index)}
-            showGradients={false}
-            enableArrowNavigation={true}
-            displayScrollbar={true}
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0 }}
-            style={{ maxWidth: 320 }}
-          />
-        </Box>
-      )}
-    </AnimatePresence>
-
-    <Box
-      sx={{
-        backgroundColor: "rgba(85, 7, 29, 0.5)",
-        borderRadius: "1rem",
-        padding: "0.4rem",
-        boxShadow: "0 6px 18px rgba(0,0,0,0.1)",
-        marginRight: "1rem",
-      }}
-    >
-      <Hamburger
-        rounded
-        direction="left"
-        toggled={isOpen}
-        toggle={setOpen}
-        duration={0.5}
-      />
-    </Box>
-  </Box> */}
-  
-
       <AnimatePresence>
       {isOpen && (
         <Box
@@ -305,12 +211,20 @@ const template = (catbtn) => {
             display: "flex",
             flexDirection: "column",
             transformOrigin: "left center",
+            backgroundColor: "rgba(249,206,231)",
+            padding: '0.6rem',
+            borderRadius: '1rem'
           }}
         >
-          <h6>Categories</h6>
+          <h6 style={{marginBottom: '0.5rem'}}>Categories</h6>
           <AnimatedList
             items={categories.map(c => c.label)}
-            onItemSelect={(item, index) => console.log(item, index)}
+            onItemSelect={(label, index) => {
+                const selected = categories[index].id;
+                console.log("Selected category:", selected);
+                setCategory(selected);
+                setSelectedCat(label)
+              }}
             showGradients={false}
             enableArrowNavigation={true}
             displayScrollbar={true}
@@ -358,102 +272,3 @@ const template = (catbtn) => {
 }
 
 
-
-
-
-
-// import React, { useEffect, useState } from "react";
-// import { Box, Button, Typography, Grid, Card, CardContent, CardMedia } from "@mui/material";
-// import { PlusCircle, ArrowUpRight } from "lucide-react";
-// import { useNavigate } from "react-router-dom";
-// import Navbar from "../components/Navbar"; 
-// import AspectRatio from "@mui/joy/AspectRatio";
-
-// export default function Explore() {
-//   const [all, setAll] = useState([]);
-//   const [loading, setLoading] = useState(true);
-//   const navigate = useNavigate();
-
-//   useEffect(() => {
-//     fetch("http://localhost:5000/api/all")
-//       .then((r) => r.json())
-//       .then((data) => {
-//         setAll(Array.isArray(data) ? data : []);
-//         setLoading(false);
-//       })
-//       .catch(() => setLoading(false));
-//   }, []);
-
-//   const categories = [
-//     { id: 16, label: "Diabetes" },
-//     { id: 20, label: "Mental Health" },
-//     { id: 126, label: "Wellness" },
-//     { id: 21, label: "Nutrition" },
-//     // Add any other category IDs you want visible as pills
-//   ];
-
-//   return (
-//     <Box sx={{ width: "100%", background: "rgba(246, 218, 226, 0.8)", minHeight: "100vh", py: 4 }}>
-//       <Navbar />
-//       <Box sx={{ width: "90%", margin: "auto", mb: 4, textAlign: "center" }}>
-//         <Typography variant="h3" sx={{ color: "rgba(227,4,110,1)", mb: 2 }}>
-//           || Articles ||
-//         </Typography>
-
-//         {/* Category pills */}
-//         <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
-//           <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
-//             {categories.map((c) => (
-//               <Button
-//                 key={c.id}
-//                 onClick={() => navigate(`/topics/${c.id}`)}
-//                 sx={{
-//                   backgroundColor: "rgba(158, 41, 74, 0.5)",
-//                   color: "rgba(246, 218, 226, 0.9)",
-//                   borderRadius: "1rem",
-//                   fontWeight: 700,
-//                 }}
-//                 startIcon={<PlusCircle />}
-//               >
-//                 {c.label}
-//               </Button>
-//             ))}
-//           </Box>
-//         </Box>
-
-//         {/* Grid preview of fetched items (optional) */}
-//         {loading ? (
-//           <Typography sx={{ mt: 3 }}>Loading...</Typography>
-//         ) : (
-//           <Grid container spacing={3} justifyContent="center" sx={{ mt: 2 }}>
-//             {all.slice(0, 9).map((info, i) => (
-//               <Grid item xs={12} sm={6} md={4} key={i}>
-//                 <Card sx={{ borderRadius: "2rem", position: "relative", overflow: "hidden" }}>
-//                   <AspectRatio ratio="16/9">
-//                     <CardMedia component="img" image={info.image} alt={info.title} />
-//                   </AspectRatio>
-
-//                   <a
-//                     href={info.link}
-//                     target="_blank"
-//                     rel="noopener noreferrer"
-//                     style={{ position: "absolute", top: 14, right: 14, background: "rgba(148,135,135,0.8)", padding: 8, borderRadius: "50%" }}
-//                   >
-//                     <ArrowUpRight size={18} />
-//                   </a>
-
-//                   <CardContent>
-//                     <Typography sx={{ fontWeight: 600 }}>{info.title}</Typography>
-//                     <Typography variant="caption" sx={{ display: "block", mt: 1 }}>
-//                       {info.category}
-//                     </Typography>
-//                   </CardContent>
-//                 </Card>
-//               </Grid>
-//             ))}
-//           </Grid>
-//         )}
-//       </Box>
-//     </Box>
-//   );
-// }

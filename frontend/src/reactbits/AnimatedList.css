@@ -1,9 +1,11 @@
 .scroll-list-container {
   position: relative;
   width: 20rem;
-}
+  background-color: rgb(253,228,242, 0.6);
+    border-radius: 12px;
+  }
 
-.scroll-list {
+  .scroll-list {
   max-height: 10rem;
   overflow-y: auto;
   padding: 16px;

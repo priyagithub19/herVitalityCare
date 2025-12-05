@@ -6,18 +6,61 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const API_URL =
-  "https://odphp.health.gov/myhealthfinder/api/v4/topicsearch.json?CategoryId=527&Lang=en";
+const API_BASE = "https://odphp.health.gov/myhealthfinder/api/v4/topicsearch.json";
 
-app.get("/api/", async (req, res) => {
+function validateCategory(id) {
+  switch (id) {
+    case "15":
+    case "16":
+    case "18":
+    case "19":
+    case "20":
+    case "21":
+    case "23":
+    case "24":
+    case "25":
+    case "26":
+    case "27":
+    case "28":
+    case "29":
+    case "56":
+    case "91":
+    case "92":
+    case "93":
+    case "94":
+    case "95":
+    case "96":
+    case "110":
+    case "126":
+      return id; 
+    default:
+      return null; 
+  }
+}
+
+app.get("/topicsearch", async (req, res) => {
   try {
-    const response = await fetch(API_URL);
+    const { categoryId } = req.query;
+
+    const validId = validateCategory(categoryId);
+    if (!validId) {
+      return res.status(400).json({ error: "Invalid or missing categoryId" });
+    }
+
+    const url = `${API_BASE}?CategoryId=${validId}&Lang=en`;
+
+    console.log("➡ Fetching URL:", url);
+
+    const response = await fetch(url);
     const data = await response.json();
 
-    const resources = data?.Result?.Resources?.Resource || [];
+    if (!data?.Result?.Resources) {
+      return res.status(404).json({ error: "No resources found" });
+    }
 
-    // MAP CLEAN FRONTEND-FRIENDLY RESULT
-    const mapped = resources.map(item => ({
+    const resources = data.Result.Resources.Resource || [];
+
+    const mapped = resources.map((item) => ({
       id: item.Id,
       title: item.Title,
       category: item.Categories,
@@ -27,13 +70,14 @@ app.get("/api/", async (req, res) => {
       lastUpdate: item.LastUpdate,
     }));
 
-    res.json({
-      total: data?.Result?.Total || mapped.length,
+    return res.json({
+      total: data.Result.Total || mapped.length,
       items: mapped,
     });
+
   } catch (error) {
-    console.error("Error fetching topics:", error);
-    res.status(500).json({ error: "Server error" });
+    console.error("Backend Error:", error);
+    res.status(500).json({ error: "Server error fetching MyHealthFinder API" });
   }
 });
 
