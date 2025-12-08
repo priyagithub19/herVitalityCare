@@ -18,7 +18,7 @@ import AnimatedList from "./reactbits/ANimatedList";
 import { Cross as Hamburger } from 'hamburger-react'
 import { AnimatePresence, motion } from "motion/react"
 import './ListAnim.css'
-
+import { ThreeDot } from 'react-loading-indicators';
 
 
 
@@ -101,7 +101,7 @@ useEffect(() => {
         <Typography variant="h3" sx={{ color: "rgba(227,4,110,1)", mb: 2 }}>
           || Articles ||
         </Typography>
-        {isLoading && <Typography>Loading...</Typography>}
+        {isLoading && <ThreeDot variant="pulsate" color={["#B66681", "#C48197", "#DFC1CB"]} size="large" text="" textColor="" />}
         {error && <Typography color="error">Error: {error}</Typography>}
           <Box>
           <Box sx={{marginBottom: '1rem', gap: 2, display: 'flex', justifyContent: 'center', marginTop: '2rem'}}>
@@ -173,7 +173,6 @@ useEffect(() => {
                       <ArrowUpRight size={18} color=" #000000ff" />
                       </a>
                     </span>
-
                     <CardContent>
                       <Typography
                         variant="body2"

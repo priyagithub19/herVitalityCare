@@ -7,8 +7,36 @@ import Button from '@mui/material/Button';
 import { useTheme } from '@mui/material/styles';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import axios from 'axios';
+import React from 'react';
+import { useState } from 'react';
 
 export default function Login() {
+
+    const [email, setEmail] = React.useState('');
+    const [password, setPassword] = React.useState('');
+
+
+        const handleSubmit = async (e) => {
+            e.preventDefault();
+            const userData = { email, password };
+            try{
+                axios.post('http://localhost:5000/login', userData)
+                .then(response => {
+                    console.log('Login successful:', response.data);
+                    alert('Login successful! Welcome back.');
+                    navigate('/dashboard');
+                })
+                .catch(error => {
+                    console.error('There was an error logging in!', error);
+                    alert('Login failed. Please try again.');
+                });
+            }
+            catch (error) {
+                console.error('There was an error!', error);
+            }
+        };
+    
 
     const theme = useTheme();
             useEffect(() => {
@@ -42,6 +70,8 @@ export default function Login() {
                             fullWidth
                             className="txtfld"
                             type={field.type}
+                            value={field.id === 'email' ? email : password}
+                            onChange={(e) => field.id === 'email' ? setEmail(e.target.value) : setPassword(e.target.value)}
                             sx={{
                             "& .MuiFilledInput-root": {
                                 height: "2.8rem",
@@ -85,7 +115,7 @@ export default function Login() {
                         />
                         ))}
                     </Box>
-                    <Button sx={{width: '70%', backgroundColor: 'rgba(242, 189, 205, 0.7)',height: '2.3rem', borderRadius: '0.7rem', marginTop: '1rem', color: '#E3046E', fontFamily: 'Kanit, sans-serif', fontWeight: '500'}}>Login</Button>
+                    <Button sx={{width: '70%', backgroundColor: 'rgba(242, 189, 205, 0.7)',height: '2.3rem', borderRadius: '0.7rem', marginTop: '1rem', color: '#E3046E', fontFamily: 'Kanit, sans-serif', fontWeight: '500'}} onClick={handleSubmit}>Login</Button>
                     <Box sx={{display: 'flex', flexDirection: 'column', textAlign: 'center', gap: '0.3rem', marginTop: '2.1rem', fontFamily: 'Kantumruy Pro, sans-serif'}}><p>Don’t have an account? </p><p style={{color: '#BD7689', fontWeight: '600', cursor: 'pointer'}} onClick={() => navigate('/reg')}>Register now</p></Box>
             </Box>
         </Box>

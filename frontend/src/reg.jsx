@@ -8,9 +8,37 @@ import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import axios from 'axios';
 
 
 export default function Register() { 
+
+    const [username, setUsername] = React.useState('');
+    const [email, setEmail] = React.useState('');
+    const [password, setPassword] = React.useState('');
+    const [age, setAge] = React.useState('');
+    const [phone, setPhone] = React.useState('');
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const userData = { username, email, password, age, phone };
+        try{
+            axios.post('http://localhost:5000/register', userData)
+            .then(response => {
+                console.log('Registration successful:', response.data);
+                alert('Registration successful! Please login.');
+                navigate('/login');
+            })
+            .catch(error => {
+                console.error('There was an error registering!', error);
+                alert('Registration failed. Please try again.');
+            });
+        }
+        catch (error) {
+            console.error('There was an error!', error);
+        }
+    };
+
 
     const theme = useTheme();
         useEffect(() => {
@@ -80,6 +108,7 @@ export default function Register() {
                                 type="text"
                                 sx={textFieldStyle}
                                 fullWidth
+                                onChange={(e) => setUsername(e.target.value)}
                             />
                     </Grid>
                     <Grid item size={12}>
@@ -90,6 +119,7 @@ export default function Register() {
                                 type="text"
                                 fullWidth
                                 sx={textFieldStyle}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                     </Grid>
                     <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', gap: '0.7rem'}}>
@@ -100,6 +130,7 @@ export default function Register() {
                                 type="password"
                                 fullWidth
                                 sx={textFieldStyle}
+                                onChange={(e) => setPassword(e.target.value)}
                             />
                         <TextField
                                 label="Enter Age"
@@ -108,6 +139,7 @@ export default function Register() {
                                 type="number"
                                 fullWidth
                                 sx={textFieldStyle}
+                                onChange={(e) => setAge(e.target.value)}
                             />
                             </Box>
                     <Grid item size={12}>
@@ -118,10 +150,11 @@ export default function Register() {
                                 type="text"
                                 fullWidth
                                 sx={textFieldStyle}
+                                onChange={(e) => setPhone(e.target.value)}
                             />
                     </Grid>
                 </Grid>
-                <Button sx={{width: '70%', backgroundColor: 'rgba(242, 189, 205, 0.7)',height: '2.3rem', borderRadius: '0.7rem', marginTop: '1rem', color: '#E3046E', fontFamily: 'Kanit, sans-serif', fontWeight: '500'}}>Register</Button>
+                <Button type="submit" sx={{width: '70%', backgroundColor: 'rgba(242, 189, 205, 0.7)',height: '2.3rem', borderRadius: '0.7rem', marginTop: '1rem', color: '#E3046E', fontFamily: 'Kanit, sans-serif', fontWeight: '500'}} onClick={handleSubmit}>Register</Button>
                 <Box sx={{display: 'flex', flexDirection: 'column', textAlign: 'center', gap: '0.3rem', marginTop: '2.1rem', fontFamily: 'Kantumruy Pro, sans-serif'}}><p>Don’t have an account? </p><p style={{color: '#BD7689', fontWeight: '600', cursor: 'pointer'}} onClick={() => navigate('/login')}>Login now</p></Box>
             </Box>
         </Box>

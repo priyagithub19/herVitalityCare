@@ -17,6 +17,7 @@ import TextType from './reactbits/TextType.jsx';
 import ShinyText from './reactbits/ShinyText';
 import AboutUs from "./Aboutus.jsx";
 import { useNavigate } from "react-router-dom";
+import Features from "./Features.jsx";
 
 export default function Home() {
 
@@ -207,6 +208,9 @@ export default function Home() {
     </Box>
     <section id="about-us">
     <AboutUs />
+    </section>
+    <section id="features">
+    <Features />
     </section>
     </div>
   );

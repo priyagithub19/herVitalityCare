@@ -14,7 +14,7 @@ import Stack from '@mui/material/Stack';
 import { House, Compass, Plus, Info, CircleUser, LogIn } from 'lucide-react';
 
 const navItems = [
-  { id: 1, title: 'Home', icon: <House />, link: '/home' },
+  { id: 1, title: 'Home', icon: <House />, link: '/' },
   { id: 2, title: 'Explore', icon: <Compass />, link: '/explore' },
   { id: 3, title: 'Start Tracking', icon: <Plus />, link: '/login' },
   { id: 4, title: 'About Us', icon: <Info />, link: '#about-us' },
