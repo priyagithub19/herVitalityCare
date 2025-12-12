@@ -308,7 +308,7 @@ return res.json({
 });
 
 const podcastApi =
-  "https://www.googleapis.com/youtube/v3/search?maxResults=25&part=snippet&q=podcast%20for%20women%27s%20health&type=video&key=AIzaSyBpHvfrhRa8caZF99PYpSfWTjz--4TiEFs";
+  "https://www.googleapis.com/youtube/v3/search?maxResults=25&part=snippet&q=podcast%20for%20women%27s%20health&type=video&key=API_KEY";
 
 app.get("/podcast", async (req, res) => {
   try {
