@@ -62,14 +62,14 @@ const features = [
 
 export default function Features() {
   return (
-    <Container sx={{ py: 6, height: '100vh' }}>
+    <Container sx={{ py: 6, height: '100vh'}}>
       <Typography
       data-aos="zoom-in"
         variant="h4"
         align="center"
         fontWeight={700}
         gutterBottom
-        sx={{ mb: 4 }}
+        sx={{ mb: 4 , color: 'rgba(146, 71, 89)' }}
       >
         🌸 Our Features & Services
       </Typography>

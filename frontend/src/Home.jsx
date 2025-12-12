@@ -18,6 +18,8 @@ import ShinyText from './reactbits/ShinyText';
 import AboutUs from "./Aboutus.jsx";
 import { useNavigate } from "react-router-dom";
 import Features from "./Features.jsx";
+import Contact from "./contact.jsx";
+import InfoDiv from "./Infodiv.jsx";
 
 export default function Home() {
 
@@ -206,11 +208,17 @@ export default function Home() {
         </Grid>
       </Grid>
     </Box>
+    <section id="infodiv">
+      <InfoDiv />
+    </section>
     <section id="about-us">
     <AboutUs />
     </section>
     <section id="features">
     <Features />
+    </section>
+    <section id="contact" style={{paddingTop: 30}}>
+      <Contact />
     </section>
     </div>
   );
