@@ -3,7 +3,9 @@ import { Box, Paper, Typography, Tabs, Tab } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiBarChart, FiBell, FiDollarSign, FiPlay } from "react-icons/fi";
 import cycle from '/images/cycle.png';
-
+import sleeo from '/images/sleepMood.png';
+import healthy from '/images/healthyvsunhealthy.png';
+import self from '/images/selfcare.png';
 
 const InfoDiv = () => {
   const [open, setOpen] = useState(items[0].id);
@@ -122,7 +124,7 @@ const Panel = ({ open, item }) => {
             <Typography variant="h5" sx={{ fontWeight: 600 }}>
               {item.title}
             </Typography>
-            <Typography sx={{marginInline: 5, fontSize: 20, marginY: 1}}>{item.description}</Typography>
+            <Typography sx={{marginInline: 5, fontSize: 20, marginY: 1}} dangerouslySetInnerHTML={{ __html: item.description }}></Typography>
           </motion.div>
         </motion.div>
       )}
@@ -159,26 +161,45 @@ const items = [
   {
     id: 2,
     title: "Sleep & Mood Health",
-    imgSrc:
-      "https://images.unsplash.com/photo-1541532713592-79a0317b6b77?auto=format&fit=crop&w=688&q=80",
+    imgSrc: sleeo,
     description:
-      "Learn about the four phases of the menstrual cycle — menstruation, follicular, ovulation, and luteal phase.",
+      "Good sleep can be a step toward better mood and mental health. Without enough sleep, you’re more likely to feel irritable, frustrated, anxious, or sad. Research has found that people who get inadequate sleep are at higher risk of experiencing mental distress that detracts from their emotional and mental health.",
   },
   {
     id: 3,
     title: "Healthy vs Unhealthy Period Symptoms",
-    imgSrc:
-      "https://images.unsplash.com/photo-1578450671530-5b6a7c9f32a8?auto=format&fit=crop&w=870&q=80",
+    imgSrc:healthy,
     description:
-      "Identify common symptoms and know when period pain, flow, or changes may need medical attention.",
+
+      `<div style="display: flex; gap: 5rem;"><div><p class="infohead" style="color: #ffe7f1ff;">📌 Healthy Period Symptoms</p>
+<ul>
+  <li>Regular cycle (21–35 days)</li>
+  <li>Lasts 2–7 days</li>
+  <li>Light to moderate bleeding</li>
+  <li>Mild cramps or back pain</li>
+  <li>Slight bloating</li>
+  <li>Mild mood changes</li>
+</ul>
+</div>
+<div>
+
+<p class="infohead" style="color: #ffe7f1ff;">📌 Unhealthy Period Symptoms</p>
+<ul>
+  <li>Irregular or missed periods</li>
+  <li>Very heavy bleeding</li>
+  <li>Lasts more than 7 days</li>
+  <li>Severe cramps or pelvic pain</li>
+  <li>Large blood clots</li>
+  <li>Bleeding between periods</li>
+  <li>Extreme fatigue or dizziness</li>
+</ul></div>`,
   },
   {
     id: 4,
     title: "Why Self-Care Matters for Women",
-    imgSrc:
-      "https://images.unsplash.com/photo-1543286386-713bdd548da4?auto=format&fit=crop&w=1740&q=80",
+    imgSrc: self,
     description:
-      "Explore the importance of emotional, physical, and mental self-care throughout your menstrual and wellness journey.",
+      "Self-care helps women stay healthy, calm, and emotionally balanced. It reduces stress, improves mood, and prevents burnout caused by daily responsibilities and pressure. When women take time to care for themselves, they gain more energy, confidence, and patience to handle everyday life. Self-care is not selfish—it is an essential part of overall well-being.",
   },
 ];
 

@@ -18,7 +18,7 @@ const navItems = [
   { id: 2, title: 'Explore', icon: <Compass />, link: '#explore' },
   { id: 3, title: 'Start Tracking', icon: <Plus />, link: '#start-tracking' },
   { id: 4, title: 'About Us', icon: <Info />, link: '#about-us' },
-  { id: 5, title: 'Profile', icon: <CircleUser />, link: '#profile' },
+  { id: 5, title: 'Profile', icon: <CircleUser />, link: '/dashboard' },
   { id: 6, title: 'Login', icon: <LogIn />, link: '/login' },
 ];
 

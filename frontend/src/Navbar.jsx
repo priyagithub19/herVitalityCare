@@ -18,7 +18,7 @@ const navItems = [
   { id: 2, title: 'Explore', icon: <Compass />, link: '/explore' },
   { id: 3, title: 'Start Tracking', icon: <Plus />, link: '/login' },
   { id: 4, title: 'About Us', icon: <Info />, link: '#about-us' },
-  { id: 5, title: 'Profile', icon: <CircleUser />, link: '#profile' },
+  { id: 5, title: 'Profile', icon: <CircleUser />, link: '/dashboard' },
   { id: 6, title: 'Login', icon: <LogIn />, link: '/login' },
 ];
 
@@ -42,7 +42,7 @@ export default function Navbar() {
     paddingInline: '9px',
     zIndex: 1200,
     backgroundColor: 'transparent',
-    boxShadow: 'none',
+    boxShadow: "none",
   }}
 >
         <Toolbar className='navbar' disableGutters >

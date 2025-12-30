@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Home';
 import Login  from './login';
 import Register from './reg'
+import DashboardNav from '../frontend/src/DashboardNav';
 
 const App = () => (
   <Router>
@@ -12,6 +13,7 @@ const App = () => (
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/reg" element={<Register />} />
+      <Route path="/dashboard" element={<DashboardNav />} />
     </Routes>
   </Router>
 );

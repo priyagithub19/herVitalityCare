@@ -21,7 +21,7 @@ export default function Contact() {
         {
             icon: <LocationPinIcon sx={{fontSize: 34}}/>,
             label: "123 Wellness St, Healthy City, HC 45678",
-            onClick: () => window.open("https://www.google.com/maps", "_blank")
+            onClick: () => window.open("https://maps.app.goo.gl/qwRwZ5TQVWpd3r268", "_blank")
         }
     ]
 
