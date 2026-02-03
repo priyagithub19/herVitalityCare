@@ -3,6 +3,9 @@ import cors from "cors";
 import fetch from "node-fetch";
 import mongoose from "mongoose";
 import UserReg from "./model/userReg.js";
+import Cycle from "./model/userCycle.js";
+import Day from "./model/userDay.js";
+
 
 const app = express();
 app.use(cors());
@@ -52,6 +55,39 @@ app.post("/register", async (req, res) => {
     });
   }
 });
+
+app.post("/cycle", async (req, res) => {
+  try {
+    const cycle = new Cycle(req.body); // expects userId, startDate, endDate, Cramps, etc.
+    await cycle.save();
+    res.status(201).json(cycle);
+  } catch (err) {
+    console.error("Cycle creation error:", err);
+    res.status(400).json({ error: err.message });
+  }
+});
+
+
+app.get("/cycle/:userId", async (req, res) => {
+  try {
+    const cycles = await Cycle.find({ userId: req.params.userId }).sort({ startDate: -1 });
+    res.json(cycles);
+  } catch (err) {
+    console.error("Fetch cycles error:", err);
+    res.status(400).json({ error: err.message });
+  }
+});
+
+app.get("/day/:cycleId", async (req, res) => {
+  try {
+    const days = await Day.find({ cycleId: req.params.cycleId }).sort({ date: 1 });
+    res.json(days);
+  } catch (err) {
+    console.error("Fetch day logs error:", err);
+    res.status(400).json({ error: err.message });
+  }
+});
+
 
 
 

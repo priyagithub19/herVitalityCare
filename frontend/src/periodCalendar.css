@@ -1,0 +1,243 @@
+.calendar {
+  --side-padding: 1.2rem;
+  --border-radius: 34px;
+  --accent-br: 15px;
+  width: 40rem;
+}
+
+.calendar select {
+  background-color: #f3f4f6;
+  padding: 15px 20px;
+  border-radius: 20px;
+  border-width: 0;
+}
+
+/* OPTIONS + BUTTONS */
+.calendar__opts,
+.calendar__buttons {
+  background-color: #FBD1DB;
+  display: flex;
+  /* column-gap: 15px; */
+}
+
+.calendar__opts {
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+  padding: 20px var(--side-padding);
+}
+
+/* BODY */
+.calendar__body {
+  background-image: linear-gradient(to bottom, rgba(237, 154, 174, 1), rgba(251, 208, 218, 0.7));
+  border-radius: 34px;
+}
+
+/* DAYS */
+.calendar__days {
+  background-color: #fff;
+  padding: 0 var(--side-padding) 10px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar__days > div {
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.02rem;
+  color: #486070;
+  margin-top: 1rem;
+}
+
+/* DATES */
+.calendar__dates {
+  padding: 2rem var(--side-padding);
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar__date {
+  --height: calc(400px / 6 - var(--side-padding));
+  height: var(--height);
+  line-height: var(--height);
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.02rem;
+  cursor: pointer;
+  position: relative;
+}
+
+.calendar__date::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: calc(var(--height) * 0.9);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: transparent;
+  border-radius: var(--accent-br);
+  transition: background-color 0.3s ease;
+}
+
+.calendar__date:not(.calendar__date--selected):not(.calendar__date--grey):hover::before {
+  background-color: #ededed;
+}
+
+.calendar__date--grey {
+  pointer-events: none;
+  background: transparent;
+}
+
+/* SELECTED RANGE */
+.calendar__date--selected {
+  color: #ff3737;
+}
+
+.calendar__date--selected::before {
+  background-color: #fed8e9;
+  border-radius: var(--accent-br);
+}
+
+.calendar__date--first-date::before {
+  border-top-left-radius: var(--accent-br);
+  border-bottom-left-radius: var(--accent-br);
+}
+
+.calendar__date--last-date::before {
+  border-top-right-radius: var(--accent-br);
+  border-bottom-right-radius: var(--accent-br);
+}
+
+.calendar__date--range-start::after {
+  content: "";
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 4px;
+  background-color: #ff374b;
+  border-radius: 24px;
+}
+
+.calendar__date--range-end {
+  color: #fff;
+}
+
+.calendar__date--range-end::before {
+  background-color: #ff374b;
+  box-shadow: 0 15px 20px -3px rgba(255, 55, 75, 0.35);
+  z-index: 1;
+}
+
+.calendar__date--range-end::after {
+  content: "";
+  position: absolute;
+  width: 50px;
+  height: calc(var(--height) * 0.9);
+  background-color: #ffeaec;
+  top: 50%;
+  right: 50%;
+  transform: translateY(-50%);
+}
+
+.calendar__date span {
+  position: relative;
+  z-index: 2;
+}
+
+/* BUTTONS */
+.calendar__buttons {
+  padding: 10px var(--side-padding) 20px;
+  border-bottom-left-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+}
+
+.calendar__button {
+  cursor: pointer;
+  border-radius: 20px;
+  border: none;
+  font-weight: 700;
+  padding: 15px 20px;
+  width: 12rem;
+}
+
+.calendar__button--grey {
+  background-color: #f3f4f6;
+}
+
+.calendar__button--primary {
+  background-color: rgb(255, 23, 170);
+  color: #fff;
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.calendar__button--primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 30px -13px rgba(255, 23, 170, 0.45);
+}
+
+.calendar__button--primary:active {
+  transform: translateY(-1px);
+}
+
+
+.prev-next-btn{
+  width: fit-content;
+}
+
+
+
+.calendar {
+width: 40rem;
+  margin: auto;
+  background-image: linear-gradient(to bottom, rgba(237, 154, 174, 1), rgba(251, 208, 218, 0.7));
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+.calendar-days,
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+}
+
+.calendar-days div {
+  font-weight: bold;
+  padding: 6px;
+}
+
+.calendar-cell {
+  padding: 10px;
+  margin: 2px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* PHASE COLORS */
+.phase-menstrual {
+  background: #e57373;
+  color: white;
+}
+
+.phase-follicular {
+  background: #ffcc80;
+}
+
+.phase-ovulation {
+  background: #81c784;
+  font-weight: bold;
+}
+
+.phase-luteal {
+  background: #64b5f6;
+  color: white;
+}

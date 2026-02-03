@@ -1,0 +1,193 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  transition: all var(--sp) cubic-bezier(0.68, -0.55, 0.265, 1.55) 0s;
+}
+
+.todoBoddy {
+  margin: 0;
+  width: 100%;
+  height: fit-content;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  font-family: Arial, Helvetica, sans-serif;
+  /* background: linear-gradient(135deg, #1f1f23, #2d2d31, #101012); */
+  position: relative;
+  overflow: hidden;
+}
+
+/* BACKGROUND TEXTURE */
+.todoBoddy::before,
+.todoBoddy::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  opacity: 0.75;
+  filter: blur(0.75px);
+
+  /* background:
+    repeating-conic-gradient(
+      #0002 0.000095%,
+      #fff0 0.0005%,
+      #fff0 0.005%,
+      #fff0 0.0005%
+    ),
+    repeating-conic-gradient(
+      #0002 0.00001%,
+      #fff0 0.00009%,
+      #fff0 0.00075%,
+      #fff0 0.000025%
+    ); */
+}
+
+/* TITLE */
+.todoBoddy h1 {
+  z-index: 1;
+  color: #DB5079;
+  font-weight: 600;
+  font-size: calc(var(--sz) * 0.35);
+  margin-bottom: calc(var(--sz) * 0.25);
+  padding: 0 calc(var(--sz) * 0.2);
+  width: 100%;
+}
+
+/* CONTENT CONTAINER */
+.todoBoddy .content {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  max-width: 80rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+
+  /* padding: calc(var(--sz) * 0.35); */
+  padding: 2rem;
+  border-radius: calc(var(--sz) * 0.25);
+
+  /* background: #0002; */
+  box-shadow: 0 0 calc(var(--sz) * 0.01) calc(var(--sz) * 0.01) #ebebeb inset;
+}
+
+/* LABEL / CHIP */
+.todoBoddy .content label {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  height: calc(var(--sz) * 0.25);
+  padding: calc(var(--sz) * 0.25) calc(var(--sz) * 0.25) calc(var(--sz) * 0.25) calc(var(--sz) * 0.375);
+
+  margin: calc(var(--sz) * 0.125);
+  border-radius: var(--sz);
+
+  font-size: 1rem;
+  font-family: inherit;
+  text-transform: capitalize;
+
+  color: var(--ic);
+  background: #C5486C 80%;
+
+  box-shadow: 0 0 0 calc(var(--sz) * 0.015) var(--ic) inset;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* CHECK ICON */
+.todoBoddy .content label::after {
+  content: "";
+  width: 0;
+  height: 0;
+  margin-left: calc(var(--sz) * 0.125);
+  border-radius: 50%;
+
+  background:
+    linear-gradient(230deg, #F7DCE4 0 calc(var(--sz) * 0.12), transparent 0),
+    linear-gradient(142deg, #F7DCE4 0 calc(var(--sz) * 0.14), transparent 0),
+    conic-gradient(from 43deg at 43% 64%, #F7DCE4 1% 76%, transparent 77%),
+    conic-gradient(from -45deg at 43% 64%, #F7DCE4 2% 25%, transparent 26%);
+}
+
+/* CHECKED STATE */
+.todoBoddy .content label:has(input:checked) {
+  color: #F7DCE4;
+  box-shadow: 0 0 0 4px var(--ac) inset;
+}
+
+.todoBoddy .content label:has(input:checked)::after {
+  width: calc(var(--sz) * 0.25);
+  height: calc(var(--sz) * 0.25);
+}
+
+/* HIDDEN INPUT (WORKING) */
+.todoBoddy .content label input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media screen and (max-width: 767px) {
+  :root {
+    --sz: 1rem;
+  }
+
+  .todoBoddy {
+    height: auto;
+    overflow-y: visible;
+    justify-content: flex-start;
+    align-items: center;
+    padding: calc(var(--sz) * 0.5);
+    background: #232323 !important;
+    padding-bottom: calc(var(--sz) * 0.5) !important;
+  }
+
+  .todoBoddy::before,
+  .todoBoddy::after {
+    display: none;
+  }
+
+  .todoBoddy .content {
+    height: 100%;
+    padding: 0 !important;
+    align-content: flex-start !important;
+    max-width: 100% !important;
+    box-shadow: none !important;
+    background: #fff 0 !important;
+  }
+
+  .todoBoddy .content label {
+    font-size: calc(var(--sz) * 0.22) !important;
+    height: calc(var(--sz) * 0.625) !important;
+  }
+}
+
+@media screen and (max-height: 580px) and (orientation: landscape) {
+  :root {
+    --sz: 60px !important;
+  }
+
+  .todoBoddy {
+    overflow-x: visible;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: calc(var(--sz) * 0.5);
+  }
+
+  .todoBoddy .content {
+    max-width: 100% !important;
+    justify-content: center !important;
+  }
+
+  .todoBoddy .content h1 {
+    text-align: center !important;
+  }
+}

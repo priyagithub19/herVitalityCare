@@ -35,7 +35,7 @@ export default function Contact() {
     spacing={{ xs: 1, sm: 2, md: 5 }}>
     {items.map((item, index) => (
     <Box
-    key={index} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, padding: 3, boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: 2, width: '12rem', cursor: 'pointer', transition: 'transform 0.3s' }}>
+    key={index} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, padding: 3, boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: 2, width: '100%', cursor: 'pointer', transition: 'transform 0.3s' }}>
     <Box sx={{color: '#A41F39', width: 'fit-content', backgroundColor: 'rgba(246, 218, 226, 0.8)', p: 3, borderRadius: '50%', ":hover": { transform: 'scale(1.1)', boxShadow: '0 0 12px rgba(0, 0, 0, 0.2)'}}} onClick={item.onClick}>{item.icon} </Box> 
     <Box sx={{mt: 5, alignItems: 'center', textAlign: 'center', fontSize: 16, cursor: 'pointer', ":hover": { textDecoration: 'underline', transform: 'scale(1.05)', color: 'rgba(227,4,110,0.7)'}}} onClick={item.onClick}>{item.label}</Box>
     </Box>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,300..800;1,300..800&family=Tagesschrift&family=Merienda:wght@300..900&family=BioRhyme:wght@200..800&family=Texturina:ital,opsz,wght@0,12..72,100..900;1,12..72,100..900&family=Alumni+Sans:ital,wght@0,100..900;1,100..900&family=Afacad:ital,wght@0,400..700;1,400..700&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Edu+SA+Beginner:wght@400..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&family=Saira:ital,wght@0,100..900;1,100..900&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:wght@400;600;700&family=Delius+Swash+Caps&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Edu+NSW+ACT+Hand+Pre:wght@400..700&family=Delius&family=Roboto+Slab:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,300..800;1,300..800&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Tagesschrift&family=Merienda:wght@300..900&family=BioRhyme:wght@200..800&family=Texturina:ital,opsz,wght@0,12..72,100..900;1,12..72,100..900&family=Alumni+Sans:ital,wght@0,100..900;1,100..900&family=Afacad:ital,wght@0,400..700;1,400..700&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Edu+SA+Beginner:wght@400..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&family=Saira:ital,wght@0,100..900;1,100..900&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:wght@400;600;700&family=Delius+Swash+Caps&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Edu+NSW+ACT+Hand+Pre:wght@400..700&family=Delius&family=Roboto+Slab:wght@100..900&display=swap');
 
 /* Navbar styles */
 
@@ -10,6 +10,12 @@
   scroll-behavior: smooth;
   box-sizing: inherit;
   scroll-behavior: smooth;
+}
+:root {
+	 --sz: 8vmin;
+	 --sp: 0.35s;
+	 --ac: orange;
+	 --ic: #ebebeb;
 }
 
 .navbar{
@@ -357,3 +363,228 @@ border: 1px solid rgba(255, 255, 255, 0.12);
   color: rgba(0, 0, 0, 0.8);
 }
 
+/* to-do styling */
+
+/* Todo.css */
+
+.todoBoddy {
+  --sz: 100px;
+  --sp: 0.35s;
+
+  margin: 0;
+  width: 100%;
+  height: fit-content;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  font-family: Arial, Helvetica, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* scoped transitions ONLY */
+.todoBoddy *,
+.todoBoddy *::before,
+.todoBoddy *::after {
+  transition:
+    background-color var(--sp) cubic-bezier(0.68,-0.55,0.265,1.55),
+    color var(--sp) cubic-bezier(0.68,-0.55,0.265,1.55),
+    box-shadow var(--sp) cubic-bezier(0.68,-0.55,0.265,1.55);
+}
+
+/* background texture */
+.todoBoddy::before,
+.todoBoddy::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.75;
+  filter: blur(0.75px);
+}
+
+/* title */
+.todoBoddy__title {
+  z-index: 1;
+  color: #DB5079;
+  font-weight: 600;
+  font-size: calc(var(--sz) * 0.35);
+  margin-bottom: calc(var(--sz) * 0.25);
+  padding: 0 calc(var(--sz) * 0.2);
+  width: 100%;
+}
+
+/* content */
+.todoBoddy__content {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  max-width: 80rem;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+
+  padding: calc(var(--sz) * 0.35);
+  border-radius: calc(var(--sz) * 0.25);
+
+  box-shadow: 0 0 calc(var(--sz) * 0.01)
+              calc(var(--sz) * 0.01)
+              #ebebeb inset;
+}
+
+/* chip */
+.todoChip {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  height: calc(var(--sz) * 0.75);
+  padding: calc(var(--sz) * 0.25)
+           calc(var(--sz) * 0.25)
+           calc(var(--sz) * 0.25)
+           calc(var(--sz) * 0.375);
+
+  margin: calc(var(--sz) * 0.125);
+  border-radius: var(--sz);
+
+  font-size: calc(var(--sz) * 0.25);
+  text-transform: capitalize;
+
+  color: var(--ic);
+  background: #C5486C;
+
+  box-shadow: 0 0 0 calc(var(--sz) * 0.015) var(--ic) inset;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* check icon */
+.todoChip::after {
+  content: "";
+  width: 0;
+  height: 0;
+  margin-left: calc(var(--sz) * 0.125);
+  border-radius: 50%;
+  background:
+    linear-gradient(230deg, #F7DCE4 0 calc(var(--sz) * 0.12), transparent 0),
+    linear-gradient(142deg, #F7DCE4 0 calc(var(--sz) * 0.14), transparent 0),
+    conic-gradient(from 43deg at 43% 64%, #F7DCE4 1% 76%, transparent 77%),
+    conic-gradient(from -45deg at 43% 64%, #F7DCE4 2% 25%, transparent 26%);
+}
+
+/* checked */
+.todoChip:has(.todoChip__input:checked) {
+  color: #F7DCE4;
+  box-shadow: 0 0 0 4px var(--ac) inset;
+}
+
+.todoChip:has(.todoChip__input:checked)::after {
+  width: calc(var(--sz) * 0.25);
+  height: calc(var(--sz) * 0.25);
+}
+
+/* hidden input */
+.todoChip__input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* responsive */
+@media (max-width: 767px) {
+  .todoBoddy {
+    --sz: 80px;
+    padding: calc(var(--sz) * 0.5);
+    background: #232323;
+  }
+
+  .todoBoddy::before,
+  .todoBoddy::after {
+    display: none;
+  }
+
+  .todoBoddy__content {
+    padding: 0;
+    box-shadow: none;
+  }
+}
+
+@media (max-height: 580px) and (orientation: landscape) {
+  .todoBoddy {
+    --sz: 60px;
+  }
+}
+
+
+.center-info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.day-text {
+  font-weight: 700;
+  color: #9C3A64;
+}
+
+.phase-chip {
+  height: 28px;
+  font-size: 14px;
+}
+
+
+/* Soft rounded pink theme */
+.MuiPaper-root {
+  border-radius: 16px !important;
+}
+
+.MuiCard-root {
+  border-radius: 12px !important;
+  background-color: #fff0f5 !important;
+}
+
+.MuiButton-containedPrimary {
+  background-color: #f06292 !important;
+  color: white !important;
+}
+
+.MuiChip-root {
+  color: white;
+  font-weight: bold;
+}
+
+
+
+
+
+.phase-legend {
+  position: absolute;
+  bottom: 16px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}

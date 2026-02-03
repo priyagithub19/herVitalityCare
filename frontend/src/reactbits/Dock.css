@@ -1,3 +1,9 @@
+.dock-panel,
+.dock-item,
+.dock-icon,
+.dock-label {
+  transition: none !important;
+}
 .dock-outer {
   margin: 0.5rem;
   display: flex;

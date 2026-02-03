@@ -1,0 +1,53 @@
+.cycle-container {
+  width: 97%;
+  height: 360px;
+  border-radius: 16px;
+  background: linear-gradient(rgba(250, 250, 250, 0.7), rgba(255, 255, 255, 0.6));
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  font-weight: 500;
+}
+
+.gauge {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background:
+    conic-gradient(
+      var(--color) calc(var(--progress) * 360deg),
+      #e0e0e0 0deg
+    );
+  mask: radial-gradient(circle 90px, transparent 98%, black 100%);
+  -webkit-mask: radial-gradient(circle 90px, transparent 98%, black 100%);
+  transition: all 0.6s ease;
+}
+
+.gauge::before {
+  content: "";
+  position: absolute;
+  inset: 12%;
+  border-radius: 50%;
+  background:
+    conic-gradient(
+      transparent calc(var(--progress) * 360deg - 4deg),
+      var(--color) 0 calc(var(--progress) * 360deg + 4deg),
+      transparent 0
+    );
+}
+
+.center-info {
+  position: absolute;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

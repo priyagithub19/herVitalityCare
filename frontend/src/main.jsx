@@ -3,11 +3,17 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Home';
-import Login  from './login';
+import Login from './login';
 import Register from './reg'
 import Explore from './Explore';
-import Topics from './Topics';
-import TopicDetail from './TopicDetail';
+import DashTrack from './DashTrack';
+import DashHome from './DashHome';
+import CheckInput from './checklistInput';
+import { ThemeProvider, CssBaseline } from "@mui/material";
+import DigitalHealthReport from './DigitalHealthReport';
+// import CheckInput from './checklistInput.jsx';
+import pinkTheme from "./theme";
+
 
 const App = () => (
   <Router>
@@ -16,14 +22,20 @@ const App = () => (
       <Route path="/login" element={<Login />} />
       <Route path="/reg" element={<Register />} />
       <Route path='/explore' element={<Explore />} />
-      <Route path="/topics/:categoryId" element={<Topics />} />
-      <Route path="/topic/:topicId" element={<TopicDetail />} />
+      <Route path='/dashboard' element={<DashHome />} />
+      <Route path='/trackingPage' element={<DashTrack />} />
+      <Route path='/digitalReport' element={<DigitalHealthReport />} />
     </Routes>
   </Router>
 );
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-      <DashTrack />
+    {/* <ThemeProvider theme={pinkTheme}>
+      <CssBaseline />
+      <DigitalHealthReport />
+    </ThemeProvider> */}
+    <App />
+    {/* <DigitalHealthReport /> */}
   </StrictMode>,
 )

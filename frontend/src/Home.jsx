@@ -77,7 +77,7 @@ export default function Home() {
                   <Button className="getStarted" sx={{ color: 'black', borderRadius: '30em',marginTop: '1.5rem', width: 'fit-content', fontFamily: "BioRhyme, serif", fontWeight: 'bold'}}><span style={{fontSize: '0.5rem'}} onClick={()=> navigate('/login')}>Get Started</span> <ChevronRight style={{ width: 30, height: 30, borderRadius: '50%', background: 'linear-gradient(132deg, rgba(237, 217, 217, 1) 0%, rgba(224, 204, 204, 1) 22%, rgba(179, 159, 159, 1) 100%)', marginLeft: '2%' }} /></Button>
                 </Box>  
                 </Box>
-                <Box className="infoBoxes" style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.5rem', marginBottom: '0.5rem'}}>
+                <Box className="infoBoxes" style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.5rem', marginBottom: '0.5rem', gap: 10}}>
                 {infobox.map((info) => (
                   <Card
                     key={info.id}
@@ -87,7 +87,7 @@ export default function Home() {
                       backgroundColor: '#E5D8DA',
                       position: 'relative',
                       overflow: 'hidden',
-                      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.25)'
+                      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.25)',
                     }}
                   >
                     <CardMedia

@@ -17,18 +17,14 @@ export default function Calendar() {
 
     const firstDay = new Date(year, month, 1).getDay();
 
-// Number of days in month
 const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-// Create calendar array
 const calendarDays = [];
 
-// Previous month padding
 for (let i = 0; i < firstDay; i++) {
   calendarDays.push(null);
 }
 
-// Current month days
 for (let day = 1; day <= daysInMonth; day++) {
   calendarDays.push(day);
 }
@@ -40,9 +36,9 @@ for (let day = 1; day <= daysInMonth; day++) {
     <Box
       sx={{
         width: '50rem',
-        height: "500px",
+        height: "30rem",
         position: "relative",
-        margin: "100px auto",
+        margin: "auto",
         display: "flex",
         borderRadius: "20px",
         fontFamily: "Kanit, sans-serif",
@@ -52,7 +48,6 @@ for (let day = 1; day <= daysInMonth; day++) {
         scrollbarWidth: "none",
       }}
     >
-      {/* LEFT PANEL */}
       <Box
         sx={{
           width: 300,
@@ -63,7 +58,6 @@ for (let day = 1; day <= daysInMonth; day++) {
           position: "relative",
         }}
       >
-        {/* Hamburger */}
         <Box sx={{ position: "absolute", top: 25, left: 25 }}>
           {[1, 2, 3].map(i => (
             <Box
@@ -104,15 +98,6 @@ for (let day = 1; day <= daysInMonth; day++) {
         <Box sx={{ mt: 4, px: 3 }}>
           <Typography fontSize={15}>Next Period Prediction</Typography>
           <Typography fontSize={14}>• Date: 20-Jan</Typography>
-          {/* <Typography
-            sx={{
-              textDecoration: "underline dotted",
-              cursor: "pointer",
-              "&:hover": { color: "#e827aeff" },
-            }}
-          >
-            See post events
-          </Typography> */}
         </Box>
 
         <Box sx={{ mt: 8, px: 4 }}>
@@ -150,7 +135,6 @@ for (let day = 1; day <= daysInMonth; day++) {
         </Box>
       </Box>
 
-      {/* RIGHT CALENDAR */}
       <Box sx={{ flex: 1, p: 4, position: "relative" }}>
         <Typography
           sx={{
@@ -164,37 +148,9 @@ for (let day = 1; day <= daysInMonth; day++) {
         >
           {months[month]} - {year}
         </Typography>
-
-        {/* Months */}
-        {/* <Box
-          sx={{
-            display: "flex",
-            gap: 2,
-            justifyContent: "center",
-            mt: 6,
-            color: "#AAA",
-          }}
-        >
-{months.map((m, index) => (
-            <Typography
-              key={m}
-              onClick={() => setMonth(index)}
-              sx={{
-                cursor: "pointer",
-                fontWeight: index === month ? 700 : 400,
-                color: index === month ? "#27AE60" : "#AAA",
-                "&:hover": { color: "#27e879" },
-              }}
-            >
-              {m}
-            </Typography>
-            ))}
-            </Box>
- */}
         <Divider sx={{ my: 5 }} />
 
-        {/* Days */}
-                <Box
+        <Box
           sx={{
             display: "grid",
             gridTemplateColumns: "repeat(7, 1fr)",
@@ -208,7 +164,6 @@ for (let day = 1; day <= daysInMonth; day++) {
           ))}
         </Box>
 
-        {/* Dates */}
         <Box
           sx={{
             display: "grid",

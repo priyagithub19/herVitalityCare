@@ -1,0 +1,356 @@
+:root {
+	--hue: 223;
+	--bg: hsl(var(--hue), 10%, 90%);
+	--fg: hsl(var(--hue), 10%, 10%);
+	--primary2: #B92651;
+	--primary1: #DB5079;
+	--primary3: hsl(var(--hue), 90%, 65%);
+}
+
+.trackBody {
+	color: var(--fg);
+	font: 1em/1.5 "DM Sans", sans-serif;
+	height: '100%';
+	display: grid;
+	place-items: center;
+	min-height: 12rem;
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 1.25em 0 1.25em 1.25em;
+}
+
+main,
+.track__inner {
+	position: relative;
+}
+
+.track,
+.track__inner {
+	height: 100%;
+}
+
+.track {
+	border-radius: 2em;
+	box-shadow:
+		-0.1em -0.1em 0.2em hsl(var(--hue), 10%, 70%) inset,
+		1em 1em 1em hsl(var(--hue), 10%, 95%) inset,
+		-1.5em -1.5em 1em hsl(var(--hue), 10%, 75%) inset,
+		0.1em 0.1em 0.2em hsl(var(--hue), 10%, 70%),
+		-0.1em -0.1em 0.2em hsl(var(--hue), 10%, 95%),
+		0.5em 0.5em 1em hsl(var(--hue), 10%, 70%);
+	position: absolute;
+	padding: 1em;
+	top: 0;
+	left: 0;
+	width: 4em;
+	min-height: 4em;
+}
+
+.track__inner {
+	background-image: linear-gradient(hsl(var(--hue), 10%, 95%), hsl(var(--hue), 10%, 80%));
+	border-radius: 1em;
+	box-shadow:
+		0.1em 0.2em 0 hsl(var(--hue), 10%, 85%) inset,
+		0.2em 0.4em 0 hsl(var(--hue), 10%, 85%) inset;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	margin: auto;
+	padding: 0.25em;
+	width: 2em;
+	min-height: 2em;
+	transform: translateY(-0.1em);
+}
+
+.track__inner:after {
+	backdrop-filter: blur(0.2em);
+	-webkit-backdrop-filter: blur(0.2em);
+	border-radius: inherit;
+	box-shadow:
+		0 0.1em 0.1em hsl(var(--hue), 10%, 90%) inset,
+		0 0.1em 0 hsl(var(--hue), 10%, 90%);
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	transform: translate3d(0, 0, 0);
+	z-index: 1;
+}
+
+.track__ball,
+.track__ball-hole {
+	border-radius: 50%;
+	width: 1.5em;
+	height: 1.5em;
+}
+
+.track__ball,
+.track__ball:before {
+	position: absolute;
+}
+
+.track__ball {
+	transition: transform 0.5s 0.15s linear;
+}
+
+.track__ball:before {
+	background-color: var(--primary1);
+	box-shadow:
+		0 0 0.1em hsla(var(--hue), 10%, 10%, 0.1) inset,
+		-0.3em -0.3em 0.5em var(--primary2) inset;
+	border-radius: inherit;
+	content: "";
+	display: block;
+	width: 100%;
+	height: 100%;
+	transform: scale(0.75);
+	transition: transform 0.15s linear;
+}
+
+.track__ball-hole,
+.track__separator {
+	position: relative;
+	z-index: 2;
+}
+
+.track__ball-hole {
+	background: linear-gradient(90deg, hsl(var(--hue), 10%, 60%), hsl(var(--hue), 10%, 50%));
+	box-shadow:
+		0 0.1em 0.2em hsl(var(--hue), 10%, 90%),
+		0 0 0 hsla(var(--hue), 10%, 10%, 0);
+	overflow: hidden;
+	transform-style: preserve-3d;
+	transition: box-shadow 0.3s linear;
+}
+
+.track__ball-hole .track__ball {
+	transform: translate3d(0, 0, 0);
+}
+
+.track__ball-hole:nth-of-type(2) .track__ball {
+	transform: translate3d(0, -3em, -1px);
+}
+
+.track__ball-hole:nth-of-type(3) .track__ball {
+	transform: translate3d(0, -6em, -1px);
+}
+
+.track__ball-hole:before {
+	border-radius: 50%;
+	content: "";
+	display: block;
+	box-shadow: 0 0.1em 0 hsl(var(--hue), 10%, 90%) inset;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	transform: translate3d(0, 0, 0);
+	transition: z-index 0s 0.15s steps(1);
+	z-index: 1;
+}
+
+.track__separator {
+	border-radius: 0.05em;
+	box-shadow:
+		0 0.05em 0 hsla(var(--hue), 10%, 55%, 0.7) inset,
+		0 -0.05em 0 hsla(var(--hue), 10%, 65%, 0.7) inset;
+	width: 1em;
+	height: 0.1em;
+}
+
+.track-item {
+	clip: rect(1px, 1px, 1px, 1px);
+	overflow: hidden;
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+.track-label {
+	display: block;
+	margin-bottom: 1.5em;
+	padding-left: 2.25em;
+	font-size: x-large;
+	position: relative;
+	text-shadow: 0 0 0.2em hsla(var(--hue), 10%, 10%, 0.3);
+	transition: all 0.3s linear;
+	z-index: 1;
+	-webkit-tap-highlight-color: transparent;
+}
+
+.track-label:last-of-type {
+	margin: 0;
+}
+
+.track-item:checked+.track-label {
+	color: var(--primary1);
+	text-shadow: 0 0 0.2em hsla(var(--hue), 90%, 55%, 0.3);
+	transition-delay: 0.45s;
+}
+
+/* ball behind backdrop */
+.track-item:nth-of-type(1):checked~.track .track__inner>.track__ball {
+	transform: translateY(0);
+}
+
+.track-item:nth-of-type(2):checked~.track .track__inner>.track__ball {
+	transform: translateY(1.2em);
+}
+
+.track-item:nth-of-type(3):checked~.track .track__inner>.track__ball {
+	transform: translateY(2.4em);
+}
+
+.track-item:nth-of-type(4):checked~.track .track__inner>.track__ball {
+	transform: translateY(3.6em);
+}
+
+.track-item:nth-of-type(5):checked~.track .track__inner>.track__ball {
+	transform: translateY(4.8em);
+}
+
+/* ball hole shadows */
+.track-item:nth-of-type(1):checked~.track .track__ball-hole:nth-of-type(1),
+.track-item:nth-of-type(2):checked~.track .track__ball-hole:nth-of-type(2),
+.track-item:nth-of-type(3):checked~.track .track__ball-hole:nth-of-type(3),
+.track-item:nth-of-type(4):checked~.track .track__ball-hole:nth-of-type(4),
+.track-item:nth-of-type(5):checked~.track .track__ball-hole:nth-of-type(5) {
+	box-shadow:
+		0 0.1em 0.2em hsl(var(--hue), 10%, 90%),
+		0.1em 0.2em 0.5em hsla(var(--hue), 10%, 10%, 0.5);
+	transition-delay: 0.3s;
+}
+
+/* ball hole edge to appear above or below a ball */
+.track-item:nth-of-type(1):checked~.track .track__ball-hole:nth-of-type(1):before,
+.track-item:nth-of-type(2):checked~.track .track__ball-hole:nth-of-type(2):before,
+.track-item:nth-of-type(3):checked~.track .track__ball-hole:nth-of-type(3):before,
+.track-item:nth-of-type(4):checked~.track .track__ball-hole:nth-of-type(4):before,
+.track-item:nth-of-type(5):checked~.track .track__ball-hole:nth-of-type(5):before {
+	transition-delay: 0.45s;
+	z-index: 0;
+}
+
+/* fake balls */
+/* scale the "fake" balls for the selected one */
+.track-item:nth-of-type(1):checked~.track .track__ball-hole:nth-of-type(1) .track__ball:before,
+.track-item:nth-of-type(2):checked~.track .track__ball-hole:nth-of-type(2) .track__ball:before,
+.track-item:nth-of-type(3):checked~.track .track__ball-hole:nth-of-type(3) .track__ball:before,
+.track-item:nth-of-type(4):checked~.track .track__ball-hole:nth-of-type(4) .track__ball:before,
+.track-item:nth-of-type(5):checked~.track .track__ball-hole:nth-of-type(5) .track__ball:before {
+	transform: scale(1);
+	transition-delay: 0.45s;
+}
+
+/* move real balls in the track for selections */
+.track-item:nth-of-type(1):checked~.track .track__ball-hole:nth-of-type(1) .track__ball,
+.track-item:nth-of-type(2):checked~.track .track__ball-hole:nth-of-type(2) .track__ball,
+.track-item:nth-of-type(3):checked~.track .track__ball-hole:nth-of-type(3) .track__ball,
+.track-item:nth-of-type(4):checked~.track .track__ball-hole:nth-of-type(4) .track__ball,
+.track-item:nth-of-type(5):checked~.track .track__ball-hole:nth-of-type(5) .track__ball {
+	transform: translate3d(0, 3em, -1px);
+}
+
+.track-item:nth-of-type(2):checked~.track .track__ball-hole:nth-of-type(2) .track__ball,
+.track-item:nth-of-type(3):checked~.track .track__ball-hole:nth-of-type(3) .track__ball,
+.track-item:nth-of-type(4):checked~.track .track__ball-hole:nth-of-type(4) .track__ball,
+.track-item:nth-of-type(5):checked~.track .track__ball-hole:nth-of-type(5) .track__ball {
+	transform: translate3d(0, 0, 0);
+}
+
+.track-item:nth-of-type(3):checked~.track .track__ball-hole:nth-of-type(1) .track__ball,
+.track-item:nth-of-type(4):checked~.track .track__ball-hole:nth-of-type(2) .track__ball,
+.track-item:nth-of-type(5):checked~.track .track__ball-hole:nth-of-type(3) .track__ball {
+	transform: translate3d(0, -3em, -1px);
+}
+
+.track-item:nth-of-type(4):checked~.track .track__ball-hole:nth-of-type(1) .track__ball,
+.track-item:nth-of-type(5):checked~.track .track__ball-hole:nth-of-type(2) .track__ball {
+	transform: translate3d(0, -6em, -1px);
+}
+
+.track-item:nth-of-type(5):checked~.track .track__ball-hole:nth-of-type(1) .track__ball {
+	transform: translate3d(0, -9em, -1px);
+}
+
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bg: hsl(var(--hue), 10%, 10%);
+		--fg: hsl(var(--hue), 10%, 90%);
+	}
+
+	body {
+		background: linear-gradient(120deg, hsl(var(--hue), 10%, 40%) 35%, hsl(var(--hue), 10%, 0%));
+	}
+
+	.track {
+		box-shadow:
+			-0.1em -0.1em 0.2em hsl(var(--hue), 10%, 20%) inset,
+			1em 1em 1em hsl(var(--hue), 10%, 45%) inset,
+			-1.5em -1.5em 1em hsl(var(--hue), 10%, 25%) inset,
+			0.1em 0.1em 0.2em hsl(var(--hue), 10%, 20%),
+			-0.1em -0.1em 0.2em hsl(var(--hue), 10%, 45%),
+			0.5em 0.5em 1em hsl(var(--hue), 10%, 20%);
+	}
+
+	.track__inner {
+		background-image: linear-gradient(hsl(var(--hue), 10%, 30%), hsl(var(--hue), 10%, 15%));
+		box-shadow:
+			0.1em 0.2em 0 hsl(var(--hue), 10%, 15%) inset,
+			0.2em 0.4em 0 hsl(var(--hue), 10%, 35%) inset;
+	}
+
+	.track__inner:after {
+		box-shadow:
+			0 0.1em 0.1em hsl(var(--hue), 10%, 40%) inset,
+			0 0.1em 0 hsl(var(--hue), 10%, 20%);
+	}
+
+	.track__ball-hole {
+		background: linear-gradient(90deg, hsl(var(--hue), 10%, 20%), hsl(var(--hue), 10%, 10%));
+		box-shadow:
+			0 0.1em 0.2em hsl(var(--hue), 10%, 40%),
+			0 0 0 hsla(var(--hue), 10%, 10%, 0);
+	}
+
+	.track__ball-hole:before {
+		box-shadow: 0 0.1em 0 hsl(var(--hue), 10%, 40%) inset;
+	}
+
+	.track__separator {
+		box-shadow:
+			0 0.05em 0 hsla(var(--hue), 10%, 0%, 0.7) inset,
+			0 -0.05em 0 hsla(var(--hue), 10%, 10%, 0.7) inset;
+	}
+
+	.track-item:nth-of-type(1):checked~.track .track__ball-hole:nth-of-type(1),
+	.track-item:nth-of-type(2):checked~.track .track__ball-hole:nth-of-type(2),
+	.track-item:nth-of-type(3):checked~.track .track__ball-hole:nth-of-type(3),
+	.track-item:nth-of-type(4):checked~.track .track__ball-hole:nth-of-type(4),
+	.track-item:nth-of-type(5):checked~.track .track__ball-hole:nth-of-type(5) {
+		box-shadow:
+			0 0.1em 0.2em hsl(var(--hue), 10%, 40%),
+			0.1em 0.2em 0.5em hsla(var(--hue), 10%, 10%, 0.7);
+	}
+
+	.track-label {
+		text-shadow: 0 0 0.2em hsla(var(--hue), 10%, 90%, 0.3);
+	}
+
+	.track-item:checked+.track-label {
+		color: var(--primary3);
+		text-shadow: 0 0 0.2em hsla(var(--hue), 90%, 65%, 0.3);
+	}
+}
